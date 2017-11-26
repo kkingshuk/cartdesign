@@ -573,7 +573,8 @@ h1 {
 }
 #content .product .text .buttons {
   clear: both;
-  text-align: center;
+  text-align: left;
+  margin-bottom: 0;
 }
 #content .product .text .buttons .btn {
   margin-bottom: 10px;

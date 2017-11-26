@@ -1,9 +1,19 @@
 import { Injectable } from '@angular/core';
 import {Http, Headers, RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/map';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
  
 @Injectable()
 export class ApiDataService {
+    
+  private noOfCartItems = new BehaviorSubject<number>(0);
+  currentOfCartItems = this.noOfCartItems.asObservable();
+
+
+  changeCartItems(noOfItems: number) {
+    this.noOfCartItems.next(noOfItems);
+  }
+
   constructor(
   private http: Http
   ) {}
@@ -16,6 +26,14 @@ export class ApiDataService {
   }
 
   public ENV_URL = 'http://10.245.231.103:8080';
+
+  
+
+  public getAllProduct(){
+    return this.http.get('assets/data/products.data.json').map(
+      (response) =>response.json()
+    );
+  }
   
   //USER SERVICES>>>>>>>>>>>>>>>>>>>>
   public userDetails(){
@@ -53,6 +71,9 @@ export class ApiDataService {
   }
   public getAllCartProduct(){
     //POST /v1/cart/getall
+    return this.http.get('assets/data/products.data.json').map(
+      (response) =>response.json()
+    );
   }
   public removeCartProduct(){
     //POST /v1/cart/remove/{productId}
