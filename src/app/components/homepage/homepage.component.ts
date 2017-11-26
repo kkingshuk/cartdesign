@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiDataService} from '../../services/api-data.service';
+import {SharedService} from '../../services/shared.service';
 
 @Component({
   selector: 'app-homepage',
@@ -10,16 +11,17 @@ export class HomepageComponent implements OnInit {
   allProducts : any[];
   currentOfCartItems:number;
   constructor(
-    private apiSrv : ApiDataService
+    private apiSrv : ApiDataService,
+    private shrSrv : SharedService
   ) { }
 
   ngOnInit() {
-    this.apiSrv.currentOfCartItems.subscribe(noOfItems => this.currentOfCartItems = noOfItems);
-    this.apiSrv.getAllCartProduct().subscribe(
-      data => this.apiSrv.changeCartItems(data.allproducts.length),
-      (error) => console.log(error),//Error Handler
-      () => console.log("completed getNotifications")//Complete Handler
-    );
+    this.shrSrv.currentOfCartItems.subscribe(noOfItems => this.currentOfCartItems = noOfItems);    
+    // this.apiSrv.getAllCartProduct().subscribe(
+    //   data => this.shrSrv.changeCartItems(data.allproducts.length),
+    //   (error) => console.log(error),//Error Handler
+    //   () => console.log("completed getNotifications")//Complete Handler
+    // );
     //this.apiSrv.changeCartItems(this.currentOfCartItems);
     // this.apiSrv.getNotifications().subscribe(
     //   (data) => console.log(data),//success Handler
@@ -50,11 +52,11 @@ export class HomepageComponent implements OnInit {
   }
   public removeFromCart(product){
     //console.log(product);
-    this.apiSrv.changeCartItems(this.currentOfCartItems-1);
+    this.shrSrv.changeCartItems(this.currentOfCartItems-1);
   }
   public addToCart(product){
     //console.log(product);
-    this.apiSrv.changeCartItems(this.currentOfCartItems+1);
+    this.shrSrv.changeCartItems(this.currentOfCartItems+1);
   }
   public addToWishlist(product){
     console.log(product);

@@ -1,18 +1,10 @@
 import { Injectable } from '@angular/core';
 import {Http, Headers, RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/map';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+
  
 @Injectable()
-export class ApiDataService {
-    
-  private noOfCartItems = new BehaviorSubject<number>(0);
-  currentOfCartItems = this.noOfCartItems.asObservable();
-
-
-  changeCartItems(noOfItems: number) {
-    this.noOfCartItems.next(noOfItems);
-  }
+export class ApiDataService {    
 
   constructor(
   private http: Http
