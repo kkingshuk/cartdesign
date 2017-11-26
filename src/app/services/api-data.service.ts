@@ -8,8 +8,11 @@ export class ApiDataService {
   private http: Http
   ) {}
 
-  createAuthorizationHeader(headers: Headers) {
-    headers.append('auth-key', 'Basic ' + btoa('username:password')); 
+  private createAuthorizationHeader(headers: Headers) {
+    localStorage.setItem('authtoken', '12345');
+    let authKey = JSON.parse(localStorage.getItem('authtoken'));
+    //console.log(authKey);
+    headers.append('auth-key', authKey);
   }
 
   public ENV_URL = 'http://10.245.231.103:8080';
@@ -25,7 +28,7 @@ export class ApiDataService {
   //CART SERVICES>>>>>>>>>>>>>>>>>>>>
   public dummygetNotifications(){ // 
     let headers = new Headers();
-    this.createAuthorizationHeader(headers);     
+    this.createAuthorizationHeader(headers);
     let options = new RequestOptions({headers: headers});
     //this.http.get(this.ENV_URL + '/v1/cart/getNotifications/2').map(
     return this.http.get('https://jsonplaceholder.typicode.com/posts/2', options).map(
@@ -45,28 +48,6 @@ export class ApiDataService {
       (response) =>response.json()
     );
   }
-  // public getNotifications(){ // 
-  //   let headers = new Headers();
-  //   headers.append('authentication-token', `hello-token`);     
-  //   let options = new RequestOptions({headers: headers});
-  //   //this.http.get(this.ENV_URL + '/v1/cart/getNotifications/2').map(
-  //   return this.http.get('https://jsonplaceholder.typicode.com/posts/2', options).map(
-  //     (response) =>response.json()
-  //   );
-  // }
-  // public getNotificationsPosts(){
-  //   let param = {
-  //     title: 'foo',
-  //     body: 'bar',
-  //     userId: 1
-  //   };
-  //   let headers = new Headers();
-  //   headers.append('authentication', `hello`);     
-  //   let options = new RequestOptions({headers: headers});
-  //   return this.http.post('https://jsonplaceholder.typicode.com/posts', param, options).map(
-  //     (response) =>response.json()
-  //   );
-  // }
   public addToCart(){
     //POST /v1/cart/add    
   }
