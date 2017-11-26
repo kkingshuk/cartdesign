@@ -13,7 +13,26 @@ export class HomepageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.apiSrv.getNotifications();
+    // this.apiSrv.getNotifications().subscribe(
+    //   (data) => console.log(data),//success Handler
+    //   (error) => console.log(error),//Error Handler
+    //   () => console.log("completed getNotifications")//Complete Handler
+    // );
+    // this.apiSrv.getNotificationsPosts().subscribe(
+    //   (data) => console.log(data),//success Handler
+    //   (error) => console.log(error),//Error Handler
+    //   () => console.log("completed getNotificationsPosts")//Complete Handler
+    // );
+    this.apiSrv.dummygetNotificationsPosts().subscribe(
+      (data) => console.log(data),//success Handler
+      (error) => console.log(error),//Error Handler
+      () => console.log("completed dummygetNotificationsPosts")//Complete Handler
+    );
+    this.apiSrv.dummygetNotifications().subscribe(
+      (data) => console.log(data),//success Handler
+      (error) => console.log(error),//Error Handler
+      () => console.log("completed dummygetNotifications")//Complete Handler
+    );
   }
 
 }
