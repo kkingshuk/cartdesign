@@ -13,7 +13,7 @@ export class HomepageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.apiSrv.fetchData();
+    this.apiSrv.getNotifications();
   }
 
 }
